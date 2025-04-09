@@ -12,6 +12,7 @@ class SubscriberController extends Controller
      *     path="/api/subscribers",
      *     summary="Get all subscribers",
      *     tags={"Subscribers"},
+     *     security={{ "bearerAuth": {} }},
      *     @OA\Response(
      *         response=200,
      *         description="A list of subscribers",
@@ -30,6 +31,7 @@ class SubscriberController extends Controller
      *     path="/api/subscribers",
      *     summary="Create a new subscriber",
      *     tags={"Subscribers"},
+     *     security={{ "bearerAuth": {} }},
      *     @OA\RequestBody(
      *         required=true,
      *         @OA\JsonContent(
@@ -68,6 +70,7 @@ class SubscriberController extends Controller
      *     path="/api/subscribers/{id}",
      *     summary="Get a single subscriber",
      *     tags={"Subscribers"},
+     *     security={{ "bearerAuth": {} }},
      *     @OA\Parameter(
      *         name="id",
      *         in="path",
@@ -96,6 +99,7 @@ class SubscriberController extends Controller
      *     path="/api/subscribers/{id}",
      *     summary="Update a subscriber",
      *     tags={"Subscribers"},
+     *     security={{ "bearerAuth": {} }},
      *     @OA\Parameter(
      *         name="id",
      *         in="path",
@@ -145,6 +149,7 @@ class SubscriberController extends Controller
      *     path="/api/subscribers/{id}",
      *     summary="Delete a subscriber",
      *     tags={"Subscribers"},
+     *     security={{ "bearerAuth": {} }},
      *     @OA\Parameter(
      *         name="id",
      *         in="path",

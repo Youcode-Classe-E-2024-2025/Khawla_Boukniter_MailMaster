@@ -270,7 +270,12 @@
                     "200": {
                         "description": "A list of newsletters"
                     }
-                }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
             },
             "post": {
                 "tags": [
@@ -307,7 +312,12 @@
                     "400": {
                         "description": "Invalid input"
                     }
-                }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
             }
         },
         "/api/newsletters/{id}": {
@@ -334,7 +344,12 @@
                     "404": {
                         "description": "Newsletter not found"
                     }
-                }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
             },
             "put": {
                 "tags": [
@@ -384,7 +399,12 @@
                     "404": {
                         "description": "Newsletter not found"
                     }
-                }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
             },
             "delete": {
                 "tags": [
@@ -409,7 +429,12 @@
                     "404": {
                         "description": "Newsletter not found"
                     }
-                }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
             }
         },
         "/api/subscribers": {

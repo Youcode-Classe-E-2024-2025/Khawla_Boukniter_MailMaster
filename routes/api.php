@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CampaignController;
 use App\Http\Controllers\NewsletterController;
 use App\Http\Controllers\SubscriberController;
@@ -10,8 +11,15 @@ Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:sanctum');
 
-Route::apiResource('newsletters', NewsletterController::class);
+Route::post('/register', [AuthController::class, 'register']);
+Route::post('/login', [AuthController::class, 'login']);
 
-Route::apiResource('subscribers', SubscriberController::class);
+Route::middleware(['auth:sanctum', 'web'])->group(function () {
+    Route::post('/logout', [AuthController::class, 'logout']);
 
-Route::apiResource('campaigns', CampaignController::class);
+    Route::apiResource('newsletters', NewsletterController::class);
+
+    Route::apiResource('subscribers', SubscriberController::class);
+
+    Route::apiResource('campaigns', CampaignController::class);
+});
