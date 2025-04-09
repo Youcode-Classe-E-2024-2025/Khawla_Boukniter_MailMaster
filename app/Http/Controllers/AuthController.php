@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Hash;
 
 /**
  * @OA\Info(
- *    title="CarRental API",
+ *    title="MailMAster API",
  *    version="1.0.0",
  * )
  * @OA\Tag(
