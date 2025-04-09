@@ -1,8 +1,17 @@
 <?php
 
+use App\Http\Controllers\CampaignController;
+use App\Http\Controllers\NewsletterController;
+use App\Http\Controllers\SubscriberController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:sanctum');
+
+Route::apiResource('newsletters', NewsletterController::class);
+
+Route::apiResource('subscribers', SubscriberController::class);
+
+Route::apiResource('campaigns', CampaignController::class);
