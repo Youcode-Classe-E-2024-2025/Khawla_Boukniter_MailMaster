@@ -12,6 +12,7 @@ class NewsletterController extends Controller
      *     path="/api/newsletters",
      *     summary="Get all newsletters",
      *     tags={"Newsletters"},
+     *     security={{ "bearerAuth": {} }},
      *     @OA\Response(
      *         response=200,
      *         description="A list of newsletters",
@@ -30,6 +31,7 @@ class NewsletterController extends Controller
      *     path="/api/newsletters",
      *     summary="Create a new newsletter",
      *     tags={"Newsletters"},
+     *     security={{ "bearerAuth": {} }},
      *     @OA\RequestBody(
      *         required=true,
      *         @OA\JsonContent(
@@ -55,12 +57,15 @@ class NewsletterController extends Controller
             'content' => 'required|string',
         ]);
 
-        $newsletter = Newsletter::create($validated);
-
-        return response()->json([
-            'message' => 'newsletter created',
-            'newsletter' => $newsletter
-        ], 201);
+        try {
+            $newsletter = Newsletter::create([
+                'title' => $validated['title'],
+                'content' => $validated['content'],
+            ]);
+            return response()->json($newsletter, 201);
+        } catch (\Exception $e) {
+            return response()->json(['error' => $e->getMessage()], 500);
+        }
     }
 
     /**
@@ -68,6 +73,7 @@ class NewsletterController extends Controller
      *     path="/api/newsletters/{id}",
      *     summary="Get a single newsletter",
      *     tags={"Newsletters"},
+     *     security={{ "bearerAuth": {} }},
      *     @OA\Parameter(
      *         name="id",
      *         in="path",
@@ -96,6 +102,7 @@ class NewsletterController extends Controller
      *     path="/api/newsletters/{id}",
      *     summary="Update a newsletter",
      *     tags={"Newsletters"},
+     *     security={{ "bearerAuth": {} }},
      *     @OA\Parameter(
      *         name="id",
      *         in="path",
@@ -145,6 +152,7 @@ class NewsletterController extends Controller
      *     path="/api/newsletters/{id}",
      *     summary="Delete a newsletter",
      *     tags={"Newsletters"},
+     *     security={{ "bearerAuth": {} }},
      *     @OA\Parameter(
      *         name="id",
      *         in="path",

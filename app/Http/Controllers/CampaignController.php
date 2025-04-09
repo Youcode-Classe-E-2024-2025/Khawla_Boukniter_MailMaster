@@ -12,6 +12,7 @@ class CampaignController extends Controller
      *     path="/api/campaigns",
      *     summary="Get all campaigns",
      *     tags={"Campaigns"},
+     *     security={{ "bearerAuth": {} }},
      *     @OA\Response(
      *         response=200,
      *         description="A list of campaigns",
@@ -30,6 +31,7 @@ class CampaignController extends Controller
      *     path="/api/campaigns",
      *     summary="Create a new campaign",
      *     tags={"Campaigns"},
+     *     security={{ "bearerAuth": {} }},
      *     @OA\RequestBody(
      *         required=true,
      *         @OA\JsonContent(
@@ -70,6 +72,7 @@ class CampaignController extends Controller
      *     path="/api/campaigns/{id}",
      *     summary="Get a single campaign",
      *     tags={"Campaigns"},
+     *     security={{ "bearerAuth": {} }},
      *     @OA\Parameter(
      *         name="id",
      *         in="path",
@@ -98,6 +101,7 @@ class CampaignController extends Controller
      *     path="/api/campaigns/{id}",
      *     summary="Update a campaign",
      *     tags={"Campaigns"},
+     *     security={{ "bearerAuth": {} }},
      *     @OA\Parameter(
      *         name="id",
      *         in="path",
@@ -149,6 +153,7 @@ class CampaignController extends Controller
      *     path="/api/campaigns/{id}",
      *     summary="Delete a campaign",
      *     tags={"Campaigns"},
+     *     security={{ "bearerAuth": {} }},
      *     @OA\Parameter(
      *         name="id",
      *         in="path",
