@@ -1,66 +1,143 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# **Newsletter API Project**
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+## **Description**
 
-## About Laravel
+Ce projet est une API RESTful pour gérer les newsletters, les abonnés et les campagnes. Il est construit avec **Laravel 12**, utilisant **Laravel Sanctum** pour l'authentification et **Swagger** pour la documentation de l'API.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## **Prérequis**
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+Avant de commencer, assure-toi d'avoir les outils suivants installés sur ta machine :
+- **PHP 8.0+**
+- **Composer**
+- **Laravel 12**
+- **PostgreSQL ou MySQL** (selon ta configuration de base de données)
+- **Node.js** et **npm** (pour Swagger et les outils de développement)
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+---
 
-## Learning Laravel
+## **Installation**
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+1. **Clonez le projet** :
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+   Clone ce projet depuis GitHub dans le répertoire de ton choix :
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+   ```bash
+   git clone https://github.com/ton-repository/newsletter-api.git
+   cd newsletter-api
 
-## Laravel Sponsors
+2. **Installe les dépendances du projet**:
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+    Installe les dépendances via Composer :
 
-### Premium Partners
+    ```bash
+    composer install
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+3. **Configure ton environnement**:
 
-## Contributing
+    Duplique le fichier .env.example et renomme-le en .env :
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+    ```bash
+    cp .env.example .env
 
-## Code of Conduct
+    Puis configure les paramètres de la base de données dans le fichier .env :
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+    ```ini
+    DB_CONNECTION=pgsql
+    DB_HOST=127.0.0.1
+    DB_PORT=5432
+    DB_DATABASE=newsletter_system
+    DB_USERNAME=ton_user
+    DB_PASSWORD=ton_mot_de_passe
 
-## Security Vulnerabilities
+4. **Génère la clé d'application**:
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+    Exécute la commande suivante pour générer la clé d'application :
 
-## License
+    ```bash
+    php artisan key:generate
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+5. **Exécute les migrations**
+
+    Crée les tables nécessaires dans la base de données avec les migrations :
+
+    ```bash
+    php artisan migrate
+
+## **Configuration de l'authentification**
+
+Le projet utilise Laravel Sanctum pour l'authentification des API.
+
+1. **Publie la configuration de Sanctum** :
+
+    Si ce n'est pas déjà fait, publie les fichiers de configuration pour Sanctum avec cette commande :
+
+    ```bash
+    php artisan vendor:publish --provider="Laravel\Sanctum\SanctumServiceProvider"
+
+2. **Crée un token pour l'authentification** :
+
+Lorsque tu veux tester l'API, tu dois obtenir un token d'accès. Tu peux t'inscrire via la route `POST /api/register` et te connecter via `POST /api/login` pour obtenir un token.
+
+## **Routes API disponibles**
+
+1. **Authentification**
+
+    * **POST /api/register** : Créer un utilisateur.
+
+    * **POST /api/login** : Se connecter et obtenir un token d'accès.
+
+    * **POST /api/logout** : Se déconnecter (nécessite d'être authentifié).
+
+2. **Newsletters**
+
+    * **GET /api/newsletters** : Lister toutes les newsletters.
+
+    * **POST /api/newsletters** : Créer une nouvelle newsletter.
+
+    * **GET /api/newsletters/{id}** : Obtenir une newsletter par son ID.
+
+    * **PUT /api/newsletters/{id}** : Mettre à jour une newsletter.
+
+    * **DELETE /api/newsletters/{id}** : Supprimer une newsletter.
+
+3. **Abonnés**
+
+    * **GET /api/subscribers** : Lister tous les abonnés.
+
+    * **POST /api/subscribers** : Ajouter un nouvel abonné.
+
+    * **GET /api/subscribers/{id}** : Obtenir un abonné par son ID.
+
+    * **PUT /api/subscribers/{id}** : Mettre à jour un abonné.
+
+    * **DELETE /api/subscribers/{id}** : Supprimer un abonné.
+
+4. **Campagnes**
+
+    * **GET /api/campaigns** : Lister toutes les campagnes.
+
+    * **POST /api/campaigns** : Créer une nouvelle campagne.
+
+    * **GET /api/campaigns/{id}** : Obtenir une campagne par son ID.
+
+    * **PUT /api/campaigns/{id}** : Mettre à jour une campagne.
+
+    * **DELETE /api/campaigns/{id}** : Supprimer une campagne.
+
+## **Documentation Swagger**
+
+La documentation Swagger de l'API est générée automatiquement. Pour la consulter, lance l'application et accède à l'URL suivante dans ton navigateur :
+
+    http://127.0.0.1:8000/api/documentation
+
+Cette documentation te permettra de tester les routes directement et de consulter les détails des paramètres et des réponses.
+
+## **Structure des fichiers**
+
+* app/Http/Controllers : Contient les contrôleurs pour l'authentification et les entités (Newsletter, Subscriber, Campaign).
+
+* app/Models : Contient les modèles correspondants à la base de données (User, Newsletter, Subscriber, Campaign).
+
+* routes/api.php : Contient les routes API pour l'authentification, la gestion des newsletters, des abonnés et des campagnes.
+
+* config/l5-swagger.php : Configuration de Swagger pour générer la documentation API.
