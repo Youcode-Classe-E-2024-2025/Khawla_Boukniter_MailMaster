@@ -11,4 +11,9 @@ class Campaign extends Model
         'content',
         'newletter_id'
     ];
+
+    public function newsletter()
+    {
+        return $this->belongsTo(Newsletter::class);
+    }
 }

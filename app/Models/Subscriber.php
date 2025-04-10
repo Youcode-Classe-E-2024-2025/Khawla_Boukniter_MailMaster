@@ -10,4 +10,9 @@ class Subscriber extends Model
         'email',
         'newsletter_id'
     ];
+
+    public function newsletter()
+    {
+        return $this->belongsTo(Newsletter::class);
+    }
 }
