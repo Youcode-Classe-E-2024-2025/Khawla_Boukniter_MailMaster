@@ -8,15 +8,13 @@ const Login = ({ onLogin }) => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            // Envoyer la requête POST à l'API pour se connecter
             const response = await axios.post('http://127.0.0.1:8000/api/login', {
                 email,
                 password
             }, {
-                withCredentials: true, // Nécessaire pour utiliser Laravel Sanctum
+                withCredentials: true,
             });
 
-            // Si la connexion réussit, appeler onLogin pour mettre à jour l'état dans le parent
             onLogin(response.data);
         } catch (error) {
             alert('Erreur de connexion');
