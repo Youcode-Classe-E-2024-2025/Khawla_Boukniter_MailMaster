@@ -23,7 +23,21 @@ const Campaigns = () => {
         };
 
         fetchCampaigns();
-    }, []);
+    }, [token]);
+
+    const sendCampaign = async (id) => {
+        try {
+            await axios.post(`http://127.0.0.1:8000/api/campaigns/${id}/send`, {}, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            });
+            alert('Campaign sent successfully');
+        } catch (error) {
+            console.error('Error sending campaign:', error);
+            alert('Error sending campaign');
+        }
+    };
 
     if (loading) {
         return <div>Loading campaigns...</div>;
@@ -37,6 +51,7 @@ const Campaigns = () => {
                     <li key={campaign.id}>
                         <h3>{campaign.subject}</h3>
                         <p>{campaign.content}</p>
+                        <button onClick={() => sendCampaign(campaign.id)}>Send Campaign</button>
                     </li>
                 ))}
             </ul>
