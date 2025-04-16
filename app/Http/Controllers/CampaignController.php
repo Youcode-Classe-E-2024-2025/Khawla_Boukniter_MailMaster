@@ -213,4 +213,33 @@ class CampaignController extends Controller
 
         return response()->json(['message' => 'Campaign sent successfully'], 200);
     }
+
+    /**
+     * @OA\Get(
+     *     path="/api/campaigns/{id}/preview",
+     *     summary="Preview a single campaign",
+     *     tags={"Campaigns"},
+     *     security={{ "bearerAuth": {} }},
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         required=true,
+     *         @OA\Schema(type="integer")
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Details of the campaign preview",
+     *     ),
+     *     @OA\Response(
+     *         response=404,
+     *         description="Campaign not found"
+     *     )
+     * )
+     */
+    public function preview($id)
+    {
+        $campaign = Campaign::findOrFail($id);
+
+        return response()->json($campaign);
+    }
 }
