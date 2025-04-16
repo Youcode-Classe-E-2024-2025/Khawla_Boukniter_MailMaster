@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\CampaignMail;
 use App\Models\Campaign;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class CampaignController extends Controller
 {
@@ -176,5 +178,39 @@ class CampaignController extends Controller
         $campaign->delete();
 
         return response()->json('campaign deleted');
+    }
+
+    /**
+     * @OA\Post(
+     *     path="/api/campaigns/{id}/send",
+     *     summary="Send a campaign to subscribers",
+     *     operationId="sendCampaign",
+     *     tags={"Campaigns"},
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         required=true,
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Campaign sent successfully",
+     *     ),
+     *     @OA\Response(
+     *         response=400,
+     *         description="Invalid request"
+     *     )
+     * )
+     */
+    public function sendCampaign($id)
+    {
+        $campaign = Campaign::findOrFail($id);
+
+        $subscribers = $campaign->newsletter->subscribers;
+
+        foreach ($subscribers as $subscriber) {
+            Mail::to($subscriber->email)->send(new CampaignMail($campaign));
+        }
+
+        return response()->json(['message' => 'Campaign sent successfully'], 200);
     }
 }
