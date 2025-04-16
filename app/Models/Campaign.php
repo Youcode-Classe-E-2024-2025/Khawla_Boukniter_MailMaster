@@ -9,7 +9,7 @@ class Campaign extends Model
     protected $fillable = [
         'subject',
         'content',
-        'newletter_id'
+        'newsletter_id'
     ];
 
     public function newsletter()
