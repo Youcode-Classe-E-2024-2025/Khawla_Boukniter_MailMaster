@@ -123,6 +123,12 @@ Lorsque tu veux tester l'API, tu dois obtenir un token d'accès. Tu peux t'inscr
     * **PUT /api/campaigns/{id}** : Mettre à jour une campagne.
 
     * **DELETE /api/campaigns/{id}** : Supprimer une campagne.
+    
+    * **POST /api/campaigns/{id}/send** : Envoyer une campagne aux abonnés.
+
+    * **GET /api/campaigns/{id}/preview** : Voir une campagne.
+
+    * **GET /api/campaigns/{id}/email-open** : Ouvrire une campagne.
 
 ## **Documentation Swagger**
 
