@@ -242,4 +242,37 @@ class CampaignController extends Controller
 
         return response()->json($campaign);
     }
+
+    /**
+     * @OA\Get(
+     *     path="/api/campaigns/{id}/email-open",
+     *     summary="Track the opening of a campaign",
+     *     tags={"Campaigns"},
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         required=true,
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Campaign open tracked successfully",
+     *     ),
+     *     @OA\Response(
+     *         response=404,
+     *         description="Campaign not found"
+     *     )
+     * )
+     */
+    public function emailOpen($id)
+    {
+        $campaign = Campaign::findOrFail($id);
+        $campaign->opened_at = now();
+        $campaign->save();
+
+        return response()->make(
+            ' ',
+            200,
+            ['Content-Type' => 'image/png']
+        );
+    }
 }
