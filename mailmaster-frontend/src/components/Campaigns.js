@@ -13,7 +13,6 @@ const Campaigns = () => {
                     headers: {
                         Authorization: `Bearer ${token}`,
                     },
-                    withCredentials: true,
                 });
                 setCampaigns(response.data);
                 setLoading(false);
